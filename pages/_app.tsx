@@ -2,6 +2,7 @@ import React from "react"
 import "../styles/globals.css"
 import type { AppProps } from "next/app"
 import { configureStore, createSlice } from "@reduxjs/toolkit"
+import { Provider } from "react-redux"
 
 // Reduxで管理するStateの作成
 export type CounterState = {
@@ -29,7 +30,11 @@ export const store = configureStore({
 })
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <Provider store={store}>
+      <Component {...pageProps} />
+    </Provider>
+  )
 }
 
 export default MyApp
