@@ -9,6 +9,7 @@ const Home: NextPage = () => {
   const { increment } = counterSlice.actions
   return (
     <div>
+      <p>こんにちは</p>
       <p>{selector.value}</p>
       <button
         onClick={() => {
@@ -16,6 +17,9 @@ const Home: NextPage = () => {
         }}
       >
         click
+      </button>
+      <button onClick={() => console.log(selector.value)}>
+        selectorの確認
       </button>
     </div>
   )
