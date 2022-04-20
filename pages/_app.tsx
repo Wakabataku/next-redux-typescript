@@ -1,7 +1,7 @@
 import React from "react"
 import "../styles/globals.css"
 import type { AppProps } from "next/app"
-import { createSlice } from "@reduxjs/toolkit"
+import { configureStore, createSlice } from "@reduxjs/toolkit"
 
 // Reduxで管理するStateの作成
 export type CounterState = {
@@ -10,13 +10,21 @@ export type CounterState = {
 // 初期値の定義
 const initialState: CounterState = { value: 0 }
 
-export const conterSlice = createSlice({
+// sliceの作成
+export const counterSlice = createSlice({
   name: "counter",
   initialState,
   reducers: {
     increment(state) {
       state.value++
     },
+  },
+})
+
+// storeの作成
+export const store = configureStore({
+  reducer: {
+    conter: counterSlice.reducer,
   },
 })
 
