@@ -1,4 +1,5 @@
-import { NextPage } from "next";
+import React from "react"
+import { NextPage } from "next"
 
 const Home: NextPage = () => {
   return (
@@ -6,7 +7,7 @@ const Home: NextPage = () => {
       <p>count</p>
       <button>click</button>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
