@@ -16,8 +16,8 @@ export const counterSlice = createSlice({
   name: "counter",
   initialState,
   reducers: {
-    increment(state) {
-      state.value + 1
+    increment: (state) => {
+      state.value += 1
     },
   },
 })
@@ -25,9 +25,12 @@ export const counterSlice = createSlice({
 // storeの作成
 export const store = configureStore({
   reducer: {
-    conter: counterSlice.reducer,
+    counter: counterSlice.reducer,
   },
 })
+
+export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

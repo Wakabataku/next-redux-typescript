@@ -1,16 +1,18 @@
 import React from "react"
 import { NextPage } from "next"
-import { useDispatch, useSelector } from "react-redux"
-import { CounterState, counterSlice } from "./_app"
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
+import { CounterState, counterSlice, AppDispatch, RootState } from "./_app"
 
 const Home: NextPage = () => {
-  const dispatch = useDispatch()
-  const selector = useSelector((state: CounterState) => state)
+  const dispatch = useDispatch<AppDispatch>()
+  // const selector = useSelector((state) => state.counter.value)
+  const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+  const selector = useAppSelector((state) => state.counter.value)
   const { increment } = counterSlice.actions
   return (
     <div>
       <p>こんにちは</p>
-      <p>{selector.value}</p>
+      <p>{selector}</p>
       <button
         onClick={() => {
           dispatch(increment())
@@ -18,9 +20,7 @@ const Home: NextPage = () => {
       >
         click
       </button>
-      <button onClick={() => console.log(selector.value)}>
-        selectorの確認
-      </button>
+      <button onClick={() => console.log(selector)}>selectorの確認</button>
     </div>
   )
 }
