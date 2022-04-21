@@ -1,17 +1,19 @@
 import React from "react"
 import { NextPage } from "next"
+
+import { useAppDispatch, useAppSelector } from "../store/store"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
-import { CounterState, counterSlice, AppDispatch, RootState } from "./_app"
+import {
+  increment,
+  decrement,
+  incrementByAmount,
+} from "../store/CounterSlice/counterSlice"
 
 const Home: NextPage = () => {
-  const dispatch = useDispatch<AppDispatch>()
-  // const selector = useSelector((state) => state.counter.value)
-  const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+  const dispatch = useAppDispatch()
   const selector = useAppSelector((state) => state.counter.value)
-  const { increment } = counterSlice.actions
   return (
     <div>
-      <p>こんにちは</p>
       <p>{selector}</p>
       <button
         onClick={() => {
