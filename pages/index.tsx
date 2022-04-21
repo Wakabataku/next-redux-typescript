@@ -22,6 +22,13 @@ const Home: NextPage = () => {
       >
         click
       </button>
+      <button
+        onClick={() => {
+          dispatch(incrementByAmount(5))
+        }}
+      >
+        5 Up!
+      </button>
       <button onClick={() => console.log(selector)}>selectorの確認</button>
     </div>
   )
