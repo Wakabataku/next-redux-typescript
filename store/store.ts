@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit"
 import createSagaMiddleware from "@redux-saga/core"
 import { Store } from "redux"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
+import { createLogger } from "redux-logger"
 
 import counterSlice from "./CounterSlice/counterSlice"
 import { rootSaga } from "../sagas/rootSaga"
@@ -12,10 +13,14 @@ export const configureAdminStore = (): Store => {
       throw error
     },
   })
+  const logger = createLogger({
+    collapsed: true,
+    diff: true,
+  })
   const store = configureStore({
     reducer: counterSlice,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),
+      getDefaultMiddleware({ thunk: false }).concat([sagaMiddleware, logger]),
   })
   sagaMiddleware.run(rootSaga)
   return store
